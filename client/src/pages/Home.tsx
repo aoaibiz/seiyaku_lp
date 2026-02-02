@@ -245,14 +245,6 @@ export default function Home() {
               />
             </motion.div>
 
-            {/* Badge */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="badge-brand">
-                <Target className="h-4 w-4 mr-2" />
-                営業コミュニティ・講座
-              </span>
-            </motion.div>
-
             {/* Main Headline */}
             <motion.h1
               variants={fadeInUp}
