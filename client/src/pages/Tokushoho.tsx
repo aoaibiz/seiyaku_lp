@@ -95,7 +95,7 @@ export default function Tokushoho() {
                       販売URL
                     </th>
                     <td className="py-4 px-4 text-muted-foreground">
-                      本ウェブサイト
+                      <a href="https://seiyaku.manus.space/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">https://seiyaku.manus.space/</a>
                     </td>
                   </tr>
                   <tr className="border-b border-border">
