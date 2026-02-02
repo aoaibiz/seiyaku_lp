@@ -104,11 +104,13 @@ function CTAButton({
   children,
   className = "",
   pulse = false,
+  href = "https://lin.ee/ugwzBPH",
 }: {
   variant?: "primary" | "secondary" | "outline";
   children: React.ReactNode;
   className?: string;
   pulse?: boolean;
+  href?: string;
 }) {
   const baseStyles = "group relative overflow-hidden font-bold transition-all duration-300 rounded-xl";
   const variants = {
@@ -118,13 +120,15 @@ function CTAButton({
   };
 
   return (
-    <Button
-      size="lg"
-      className={`${baseStyles} ${variants[variant]} ${pulse ? "pulse-brand" : ""} ${className} px-8 py-6 text-base md:text-lg`}
-    >
-      {children}
-      <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-    </Button>
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      <Button
+        size="lg"
+        className={`${baseStyles} ${variants[variant]} ${pulse ? "pulse-brand" : ""} ${className} px-8 py-6 text-base md:text-lg`}
+      >
+        {children}
+        <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+      </Button>
+    </a>
   );
 }
 
