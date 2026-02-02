@@ -196,7 +196,7 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-center">
             <div className="flex items-center gap-2">
-              <span className="text-base">🎁</span>
+              🎁
               <span className="text-sm md:text-base font-medium">
                 【期間限定】無料個別相談 + 7大特典プレゼント
               </span>
