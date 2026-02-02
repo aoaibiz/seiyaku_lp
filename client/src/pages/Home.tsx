@@ -98,7 +98,7 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
   );
 }
 
-// CTA Button Component
+// CTA Button Component - LINE想起のグリーンで視認性最大化
 function CTAButton({
   variant = "primary",
   children,
@@ -112,21 +112,26 @@ function CTAButton({
   pulse?: boolean;
   href?: string;
 }) {
-  const baseStyles = "group relative overflow-hidden font-bold transition-all duration-300 rounded-xl";
+  const baseStyles = "group relative overflow-hidden font-bold transition-all duration-300";
   const variants = {
-    primary: "cta-button",
+    primary: "cta-button-line",
     secondary: "cta-button-outline",
     outline: "cta-button-outline",
   };
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="block">
       <Button
         size="lg"
-        className={`${baseStyles} ${variants[variant]} ${pulse ? "pulse-brand" : ""} ${className} px-8 py-6 text-base md:text-lg`}
+        className={`${baseStyles} ${variants[variant]} ${pulse ? "pulse-line" : ""} ${className} px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded-2xl min-h-[52px] md:min-h-[60px]`}
       >
-        {children}
-        <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+        <span className="flex flex-col items-center justify-center">
+          <span className="flex items-center gap-2">
+            {children}
+            <span className="text-lg md:text-xl opacity-90" role="img" aria-label="指">👉</span>
+          </span>
+          <span className="text-[10px] md:text-xs font-normal opacity-80 mt-0.5">（30秒で完了）</span>
+        </span>
       </Button>
     </a>
   );
@@ -278,7 +283,7 @@ export default function Home() {
             {/* CTA */}
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
               <CTAButton variant="primary" pulse>
-                無料で個別相談を予約する
+                LINEで無料相談を予約する
               </CTAButton>
               <Button
                 size="lg"
@@ -1273,7 +1278,7 @@ export default function Home() {
                 {/* CTA */}
                 <div className="text-center">
                   <CTAButton variant="primary" className="w-full md:w-auto" pulse>
-                    今すぐ無料で相談を予約する
+                    LINEで無料相談を予約する
                   </CTAButton>
                   <p className="text-xs text-muted-foreground mt-4">
                     ※売り込みは一切ありません。お気軽にご相談ください。

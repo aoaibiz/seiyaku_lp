@@ -263,7 +263,7 @@
     border-radius: 2px;
   }
   
-  /* CTA Button styles */
+  /* CTA Button styles - Original Red/Orange */
   .cta-button {
     @apply relative overflow-hidden px-8 py-4 text-white font-bold rounded-lg transition-all duration-300;
     background: linear-gradient(135deg, oklch(0.50 0.20 25) 0%, oklch(0.65 0.18 55) 100%);
@@ -276,6 +276,40 @@
   }
   .cta-button:active {
     transform: translateY(0) scale(1);
+  }
+  
+  /* CTA Button LINE - 深めのグリーンでLINE想起×信頼感 */
+  .cta-button-line {
+    @apply relative overflow-hidden text-white font-bold transition-all duration-300;
+    background: linear-gradient(180deg, #2BAE66 0%, #1E8F4A 100%);
+    box-shadow: 0 6px 20px rgba(30, 143, 74, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+  }
+  .cta-button-line:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(30, 143, 74, 0.5), 0 4px 8px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(180deg, #32C073 0%, #23A857 100%);
+  }
+  .cta-button-line:active {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: 0 3px 10px rgba(30, 143, 74, 0.3);
+  }
+  .cta-button-line:focus-visible {
+    outline: 3px solid rgba(43, 174, 102, 0.5);
+    outline-offset: 2px;
+  }
+  
+  /* LINEボタン用のパルスアニメーション */
+  .pulse-line {
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+  @keyframes pulse-line {
+    0%, 100% {
+      box-shadow: 0 6px 20px rgba(30, 143, 74, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      box-shadow: 0 6px 30px rgba(30, 143, 74, 0.6), 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(43, 174, 102, 0.15);
+    }
   }
   
   /* Secondary button */
