@@ -211,22 +211,16 @@ export default function Home() {
 
       {/* S1. ヒーローセクション */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background Pattern */}
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-white via-secondary/30 to-white" />
-          <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              <defs>
-                <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="oklch(0.50 0.20 25)" />
-                  <stop offset="100%" stopColor="oklch(0.65 0.18 55)" />
-                </linearGradient>
-              </defs>
-              <circle cx="200" cy="200" r="150" fill="none" stroke="url(#brandGrad)" strokeWidth="1" />
-              <circle cx="200" cy="200" r="100" fill="none" stroke="url(#brandGrad)" strokeWidth="1" />
-              <circle cx="200" cy="200" r="50" fill="none" stroke="url(#brandGrad)" strokeWidth="1" />
-            </svg>
-          </div>
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: 'url(/images/hero-bg-sales.jpg)',
+              opacity: 0.15
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
         </div>
 
         <div className="container relative z-10 py-16 md:py-24">
