@@ -261,7 +261,7 @@ export default function Home() {
             {/* Subheadline */}
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl"
+              className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl" style={{fontWeight: '500'}}
             >
               感覚や才能に頼らない、再現性のある「成約の方程式」。
               <br className="hidden md:block" />
@@ -364,7 +364,7 @@ export default function Home() {
               <motion.div variants={fadeInUp} className="text-center md:text-left">
                 <div className="inline-flex items-center gap-2 mb-4">
                   <span className="w-8 h-8 brand-gradient text-white rounded-full flex items-center justify-center text-sm font-bold font-display">1</span>
-                  <span className="text-sm font-semibold text-muted-foreground">過去</span>
+                  <span className="text-sm font-semibold text-muted-foreground" style={{color: '#0d0c0c'}}>過去</span>
                 </div>
                 <p className="text-foreground leading-relaxed">
                   「足で稼ぐ」「根性で売る」が通用した時代
@@ -375,7 +375,7 @@ export default function Home() {
               <motion.div variants={fadeInUp} className="text-center md:text-left">
                 <div className="inline-flex items-center gap-2 mb-4">
                   <span className="w-8 h-8 brand-gradient text-white rounded-full flex items-center justify-center text-sm font-bold font-display">2</span>
-                  <span className="text-sm font-semibold text-muted-foreground">現在</span>
+                  <span className="text-sm font-semibold text-muted-foreground" style={{color: '#000000'}}>現在</span>
                 </div>
                 <p className="text-foreground leading-relaxed">
                   情報過多の時代、「選ばれる理由」がなければ売れない
@@ -386,7 +386,7 @@ export default function Home() {
               <motion.div variants={fadeInUp} className="text-center md:text-left">
                 <div className="inline-flex items-center gap-2 mb-4">
                   <span className="w-8 h-8 brand-gradient text-white rounded-full flex items-center justify-center text-sm font-bold font-display">3</span>
-                  <span className="text-sm font-semibold text-muted-foreground">結論</span>
+                  <span className="text-sm font-semibold text-muted-foreground" style={{color: '#080808'}}>結論</span>
                 </div>
                 <p className="text-foreground leading-relaxed">
                   だからこそ、「型」を持つ人だけが再現性を持って成約できる
@@ -449,7 +449,7 @@ export default function Home() {
                   "営業トークに自信がなく、提案が弱い",
                   "成約率が安定せず、売上が読めない",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                  <li key={i} className="flex items-start gap-3" style={{color: '#1a1a1a'}}>
                     <span className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="w-2 h-2 bg-gray-400 rounded-full" />
                     </span>
@@ -483,7 +483,7 @@ export default function Home() {
                   "自信を持って提案でき、相手の心を動かせる",
                   "成約率が安定し、売上の予測が立つ",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-foreground">
+                  <li key={i} className="flex items-start gap-3" style={{color: '#000000'}}>
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                     {item}
                   </li>
@@ -526,16 +526,13 @@ export default function Home() {
                     なぜ私がこれを言えるのか
                   </span>
                   <h3 className="text-2xl md:text-3xl font-bold text-foreground mt-2">
-                    {"{founder_name}"}
-                  </h3>
-                  <p className="text-muted-foreground mt-1">
-                    {"{founder_credibility}"}
-                  </p>
+                    hiro                  </h3>
+                  
                 </div>
 
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    私自身、かつては「営業が苦手」でした。制作畑出身で、売り込むことに抵抗があり、商談では常に受け身。成約率は20%を切っていました。
+                    私自身、かつては「営業が苦手」でした。人と話すことが苦手で、売り込むことに抵抗があり、商談では常に受け身。成約率は20%を切っていました。
                   </p>
                   <p>
                     しかし、ある「型」に出会い、営業の本質を理解してからは、成約率が3倍以上に。今では年間{"{受講者数}"}名以上の方に、この方程式をお伝えしています。
@@ -1020,7 +1017,7 @@ export default function Home() {
           </div>
 
           <p className="text-center text-xs text-muted-foreground mt-8">
-            ※上記は仮置きです。実際の受講者様の声に差し替えてください。
+            
           </p>
         </div>
       </section>
@@ -1134,12 +1131,12 @@ export default function Home() {
             </h2>
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
+              <p style={{color: '#0a0a0a'}}>
                 AIが進化しても、人と人との信頼関係は変わりません。
                 <br />
                 むしろ、「選ばれる力」はますます重要になっていきます。
               </p>
-              <p>
+              <p style={{color: '#f70202'}}>
                 今、この「型」を身につけることは、
                 <br />
                 将来の自分への最高の投資です。
@@ -1265,7 +1262,7 @@ export default function Home() {
                       className="flex items-center gap-3 text-sm text-muted-foreground"
                     >
                       <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span>
+                      <span style={{color: '#1a1a1a'}}>
                         特典{i + 1}：{bonus}
                       </span>
                     </div>
@@ -1297,7 +1294,7 @@ export default function Home() {
                 <div className="mt-8 pt-6 border-t border-border text-center">
                   <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <Shield className="h-4 w-4 text-primary" />
-                    <span>{"{guarantee}"}</span>
+                    <span>14日間全額返金保証</span>
                   </div>
                 </div>
               </div>
