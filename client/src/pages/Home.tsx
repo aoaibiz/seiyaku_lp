@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* S1. ヒーローセクション */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section id="hero" className="relative min-h-[90vh] flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <div 

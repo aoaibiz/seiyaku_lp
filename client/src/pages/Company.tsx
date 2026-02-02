@@ -1,16 +1,28 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Building2, Mail, MapPin, Calendar, Briefcase, Hash } from "lucide-react";
-import { Link } from "wouter";
+import { ArrowLeft, Building2, Mail, MapPin, Briefcase } from "lucide-react";
 
 export default function Company() {
+  // ページ読み込み時にトップにスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleBackClick = () => {
+    window.location.href = "/#hero";
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="bg-white border-b border-border sticky top-0 z-50">
         <div className="container py-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+          <button 
+            onClick={handleBackClick}
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
             <ArrowLeft className="w-4 h-4" />
-          </Link>
+          </button>
         </div>
       </header>
 
