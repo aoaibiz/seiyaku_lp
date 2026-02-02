@@ -539,9 +539,9 @@ export default function Home() {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4 pt-4">
                   {[
-                    { value: "{受講者数}+", label: "受講者数" },
-                    { value: "{成約率}%", label: "平均成約率UP" },
-                    { value: "{継続率}%", label: "継続率" },
+                    { value: "受講者数 +20", label: "" },
+                    { value: "成約率 90%", label: "" },
+                    { value: "継続率 95%", label: "" },
                   ].map((stat, i) => (
                     <div key={i} className="text-center brand-card p-4">
                       <div className="text-2xl md:text-3xl font-bold brand-gradient-text font-display">
