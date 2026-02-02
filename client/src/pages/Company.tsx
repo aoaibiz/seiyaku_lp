@@ -62,7 +62,7 @@ export default function Company() {
                       代表者
                     </th>
                     <td className="py-4 px-6 text-muted-foreground">
-                      代表取締役 弓田大幾
+                      弓田大幾
                     </td>
                   </tr>
                   <tr className="border-b border-border">
