@@ -10,7 +10,6 @@ export default function Privacy() {
         <div className="container py-4">
           <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            <span>トップページに戻る</span>
           </Link>
         </div>
       </header>
@@ -22,17 +21,17 @@ export default function Privacy() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
+          <h1 className="text-xl md:text-2xl font-bold text-foreground mb-8 text-center">
             プライバシーポリシー
           </h1>
 
-          <div className="prose prose-gray max-w-none space-y-8">
+          <div className="prose prose-gray max-w-none space-y-8" style={{fontSize: '13px'}}>
             <p className="text-muted-foreground">
               株式会社タルムード（以下「当社」といいます）は、当社が提供するサービス「成約の方程式」（以下「本サービス」といいます）における、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます）を定めます。
             </p>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第1条（個人情報）
               </h2>
               <p className="text-muted-foreground">
@@ -41,7 +40,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第2条（取得する個人情報の項目）
               </h2>
               <p className="text-muted-foreground mb-2">当社は、本サービスの提供にあたり、以下の個人情報を取得することがあります。</p>
@@ -60,7 +59,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第3条（個人情報の利用目的）
               </h2>
               <p className="text-muted-foreground mb-2">当社は、取得した個人情報を以下の目的で利用します。</p>
@@ -78,7 +77,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第4条（利用目的の変更）
               </h2>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
@@ -88,7 +87,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第5条（第三者提供）
               </h2>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
@@ -110,7 +109,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第6条（個人情報の管理）
               </h2>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
@@ -121,7 +120,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第7条（開示・訂正・利用停止等）
               </h2>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
@@ -138,7 +137,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第8条（Cookie（クッキー）の利用）
               </h2>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
@@ -149,7 +148,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第9条（アクセス解析ツールの利用）
               </h2>
               <p className="text-muted-foreground">
@@ -158,7 +157,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第10条（未成年者の利用）
               </h2>
               <p className="text-muted-foreground">
@@ -167,7 +166,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第11条（プライバシーポリシーの変更）
               </h2>
               <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
@@ -177,7 +176,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
+              <h2 className="text-base font-bold text-foreground border-l-4 border-primary pl-4 mb-4">
                 第12条（お問い合わせ窓口）
               </h2>
               <p className="text-muted-foreground mb-4">
@@ -193,23 +192,12 @@ export default function Privacy() {
 
             <div className="mt-12 pt-8 border-t border-border">
               <p className="text-sm text-muted-foreground text-right">
-                制定日：2025年2月1日<br />
-                株式会社タルムード<br />
-                代表取締役 弓田大幾
+                制定日：2026年2月1日
               </p>
             </div>
           </div>
         </motion.div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container text-center">
-          <p className="text-sm text-gray-400">
-            © 2025 株式会社タルムード All Rights Reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

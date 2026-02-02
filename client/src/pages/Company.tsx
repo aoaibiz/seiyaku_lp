@@ -10,7 +10,6 @@ export default function Company() {
         <div className="container py-4">
           <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            <span>トップページに戻る</span>
           </Link>
         </div>
       </header>
@@ -21,18 +20,17 @@ export default function Company() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
+          style={{fontSize: '13px'}}
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-center">
+          <h1 className="text-xl md:text-2xl font-bold text-foreground mb-4 text-center">
             運営会社
           </h1>
-          <p className="text-center text-muted-foreground mb-12">
-            Company Information
-          </p>
+          
 
           {/* Company Overview */}
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Building2 className="w-6 h-6 text-primary" />
+            <h2 className="text-base font-bold text-foreground mb-6 flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-primary" />
               会社概要
             </h2>
             
@@ -96,8 +94,8 @@ export default function Company() {
 
           {/* Business Description */}
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Briefcase className="w-6 h-6 text-primary" />
+            <h2 className="text-base font-bold text-foreground mb-6 flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-primary" />
               事業内容
             </h2>
             
@@ -159,7 +157,7 @@ export default function Company() {
           {/* Mission */}
           <section className="mb-16">
             <div className="bg-gradient-to-br from-primary/5 to-orange-500/5 rounded-2xl p-8 md:p-12 border border-primary/10">
-              <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
+              <h2 className="text-base font-bold text-foreground mb-6 text-center">
                 私たちのミッション
               </h2>
               <p className="text-lg text-center text-muted-foreground leading-relaxed max-w-2xl mx-auto">
@@ -175,8 +173,8 @@ export default function Company() {
 
           {/* Contact */}
           <section>
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Mail className="w-6 h-6 text-primary" />
+            <h2 className="text-base font-bold text-foreground mb-6 flex items-center gap-2">
+              <Mail className="w-5 h-5 text-primary" />
               お問い合わせ
             </h2>
             
@@ -210,17 +208,14 @@ export default function Company() {
               </div>
             </div>
           </section>
+
+          <div className="mt-12 pt-8 border-t border-border">
+            <p className="text-sm text-muted-foreground text-right">
+              制定日：2026年2月1日
+            </p>
+          </div>
         </motion.div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container text-center">
-          <p className="text-sm text-gray-400">
-            © 2025 株式会社タルムード All Rights Reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

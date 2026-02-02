@@ -10,7 +10,6 @@ export default function Tokushoho() {
         <div className="container py-4">
           <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            <span>トップページに戻る</span>
           </Link>
         </div>
       </header>
@@ -22,11 +21,11 @@ export default function Tokushoho() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
+          <h1 className="text-xl md:text-2xl font-bold text-foreground mb-8 text-center">
             特定商取引法に基づく表記
           </h1>
 
-          <div className="prose prose-gray max-w-none">
+          <div className="prose prose-gray max-w-none" style={{fontSize: '13px'}}>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <tbody>
@@ -192,22 +191,12 @@ export default function Tokushoho() {
 
             <div className="mt-12 pt-8 border-t border-border">
               <p className="text-sm text-muted-foreground text-right">
-                最終更新日：2025年2月1日<br />
-                株式会社タルムード
+                制定日：2026年2月1日
               </p>
             </div>
           </div>
         </motion.div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container text-center">
-          <p className="text-sm text-gray-400">
-            © 2025 株式会社タルムード All Rights Reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
