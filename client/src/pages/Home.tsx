@@ -329,25 +329,16 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer brand-card">
-              <img
-                src="/images/success-vision.png"
-                alt="動画サムネイル"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-              
-              {/* Play button */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 md:w-24 md:h-24 brand-gradient rounded-full flex items-center justify-center shadow-xl transition-transform duration-300 group-hover:scale-110">
-                  <Play className="h-8 w-8 md:h-10 md:w-10 text-white ml-1" />
-                </div>
-              </div>
-
-              {/* Duration badge */}
-              <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-display">
-                3:24
-              </div>
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl brand-card">
+              <video
+                src="/images/lp-video.mov"
+                controls
+                playsInline
+                poster="/images/success-vision.png"
+                className="w-full h-full object-cover"
+              >
+                お使いのブラウザは動画タグをサポートしていません。
+              </video>
             </div>
 
             <p className="text-center text-sm text-muted-foreground mt-4">
