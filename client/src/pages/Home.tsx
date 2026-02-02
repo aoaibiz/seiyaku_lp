@@ -509,7 +509,7 @@ export default function Home() {
               <motion.div variants={fadeInUp} className="lg:col-span-2">
                 <div className="relative">
                   <img
-                    src="/images/methodology.png"
+                    src="/images/instructor.jpg"
                     alt="代表者"
                     className="w-full aspect-square object-cover rounded-2xl shadow-xl"
                   />
