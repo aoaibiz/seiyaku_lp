@@ -249,12 +249,12 @@ export default function Home() {
               variants={fadeInUp}
               className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight mb-6"
             >
-              営業が苦手でも、
+              はじめにお聞きします。
               <br />
               <span className="relative inline-block">
-                <span className="brand-gradient-text">"売れる型"</span>
+                <span className="brand-gradient-text">"営業は得意"</span>
               </span>
-              が手に入る
+              ですか？
             </motion.h1>
 
             {/* Subheadline */}
