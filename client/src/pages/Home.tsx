@@ -217,7 +217,7 @@ export default function Home() {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/hero-bg-sales.jpg)',
-              opacity: 0.7
+              opacity: 0.9
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
