@@ -259,7 +259,7 @@ export default function Home() {
             >
               感覚や才能に頼らない、再現性のある「成約の方程式」。
               <br className="hidden md:block" />
-              3ヶ月で商談が前に進む力を身につける。
+              ６ヶ月で商談が前に進む力を身につける。
             </motion.p>
 
             {/* Countdown */}
@@ -313,7 +313,7 @@ export default function Home() {
           <SectionHeading
             subtitle="まずは3分で理解"
             title="なぜ今、営業力が必要なのか"
-            description="多くの方が見落としている「売れる人」と「売れない人」の決定的な違いをお伝えします"
+            description="時代背景から、「なぜ今の時代営業なのか？」を分かりやすく解説しています。"
           />
 
           <motion.div
