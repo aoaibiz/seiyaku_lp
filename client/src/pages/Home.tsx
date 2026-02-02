@@ -32,6 +32,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "wouter";
 
 // Animation variants
 const fadeInUp = {
@@ -1318,18 +1319,18 @@ export default function Home() {
 
             {/* Links */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
-              <a href="{links_terms}" className="hover:text-white transition-colors">
+              <Link href="/terms" className="hover:text-white transition-colors">
                 利用規約
-              </a>
-              <a href="{links_privacy}" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">
                 プライバシーポリシー
-              </a>
-              <a href="{links_tokusho}" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="/tokushoho" className="hover:text-white transition-colors">
                 特定商取引法に基づく表記
-              </a>
-              <a href="{links_company}" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="/company" className="hover:text-white transition-colors">
                 運営会社
-              </a>
+              </Link>
             </div>
           </div>
 
