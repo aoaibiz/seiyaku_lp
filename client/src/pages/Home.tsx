@@ -220,7 +220,7 @@ export default function Home() {
               opacity: 1
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/80 to-white/55" />
         </div>
 
         <div className="container relative z-10 py-16 md:py-24">
