@@ -280,6 +280,7 @@ export default function Home() {
                 size="lg"
                 variant="outline"
                 className="group px-8 py-6 text-base md:text-lg rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                onClick={() => document.getElementById('video-section')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 まずは動画を見る
                 <Play className="ml-2 h-5 w-5" />
@@ -309,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* S2. 動画導線セクション */}
-      <section className="section-spacing section-gray">
+      <section id="video-section" className="section-spacing section-gray">
         <div className="container">
           <SectionHeading
             subtitle="まずは3分で理解"
@@ -878,13 +879,13 @@ export default function Home() {
                 icon: Users,
                 title: "仲間との学び合い",
                 description: "同じ志を持つ仲間と切磋琢磨。オンラインコミュニティで日々の学びを共有し、モチベーションを維持。",
-                features: ["専用Slackチャンネル", "週1回の勉強会", "成功事例の共有"],
+                features: ["専用オープンチャット", "週1回の勉強会", "成功事例の共有"],
               },
               {
                 icon: MessageCircle,
                 title: "講師への直接相談",
                 description: "少人数制だからこそ実現する、講師との距離の近さ。個別の課題に合わせたアドバイスを受けられます。",
-                features: ["月2回の個別面談", "チャットでの質問対応", "商談同席サポート"],
+                features: ["無制限の個別面談", "チャットでの質問対応"],
               },
               {
                 icon: TrendingUp,
@@ -933,43 +934,31 @@ export default function Home() {
             description="※個人の感想であり、成果を保証するものではありません"
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
               {
-                name: "{case_1_name}",
-                role: "{case_1_role}",
+                name: "Sさん",
+                role: "女性",
                 quote: "営業経験ゼロから始めましたが、3ヶ月で初成約。型があるから自信を持って商談に臨めます。",
-                result: "成約率 0% → 40%",
+                result: "成約率 20%→70%",
+                stars: 4,
+                image: "https://private-us-east-1.manuscdn.com/sessionFile/M1bAAzRicI7311tVVClw23/sandbox/Xf7f5m9oGSS55o5ZfcZ2nv-img-1_1770034267000_na1fn_dGVzdGltb25pYWwtcy1mZW1hbGU.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvTTFiQUF6UmljSTczMTF0VlZDbHcyMy9zYW5kYm94L1hmN2Y1bTlvR1NTNTVvNVpmY1oybnYtaW1nLTFfMTc3MDAzNDI2NzAwMF9uYTFmbl9kR1Z6ZEdsdGIyNXBZV3d0Y3kxbVpXMWhiR1UucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=rTFuVS3voVnxWz1KVHSR5EhC7DYTWShyxtIcynvVpqMFCOEQ8-jNJ1CNN6XREvRrQY29~LfWRHuTWmQ3AuCrNKheLXLDMtMiqBYyQOQCK-h3nBoZacws8Uu8s9IoLMcllzbdt1D3Kf-wvI3yK4epHZEszRezx5tPPRG1PeylPrHUrE2v2lTcgSCkrK~ygEpcqs6-p8V7IhYaY9c~qC0JJtrqIV8Bd6gbYrIuRcnRSWNfM3-U9PeKZORZerZlyp2LMUkdA-xrHct9qPfZhBXbB7AkScqhSnMMYxrxwCPZIKQFlZF7LVnziMYmXUvTGQRKfUOyAfV9wsV3eDsirRA7uw__",
               },
               {
-                name: "{case_2_name}",
-                role: "{case_2_role}",
+                name: "Yさん",
+                role: "男性",
                 quote: "価格競争から抜け出せず悩んでいましたが、価値で選ばれる提案ができるようになりました。",
-                result: "単価 1.5倍UP",
+                result: "単価 1.5倍",
+                stars: 4.5,
+                image: "https://private-us-east-1.manuscdn.com/sessionFile/M1bAAzRicI7311tVVClw23/sandbox/Xf7f5m9oGSS55o5ZfcZ2nv-img-2_1770034261000_na1fn_dGVzdGltb25pYWwteS1tYWxl.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvTTFiQUF6UmljSTczMTF0VlZDbHcyMy9zYW5kYm94L1hmN2Y1bTlvR1NTNTVvNVpmY1oybnYtaW1nLTJfMTc3MDAzNDI2MTAwMF9uYTFmbl9kR1Z6ZEdsdGIyNXBZV3d0ZVMxdFlXeGwucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=csjXA-n4hg68UHKMWPTqlfj7lnqgvtmM-Z6dD7rBuWW-zsv6j0vSpNtdGAfxUQQMgIW9PHcC3uaGtuh1fnQESj3hQ~81qsTqcEE8Thou3D3shpqFzoql76CGaxvUhsuV4GPQFiwfBZsMCX3lg7YWPiU5IivzdtnxFUvfe-v9fcwuu8o7NEQ93XQXTn-Up8bBSduIyYTXlTX5InSkalmC0LGbm93Hnova9CygFvoZu9SvRVuYgUaaov0HbMP9JabdrpN8~KzzcKeOeHwJ6Z4t6jDojlUJnU9jj90Ldmz3-xmH5XKavib3AvZK21c~PqmmD3ujbwt8NW7m1N~SpmXcyA__",
               },
               {
-                name: "{case_3_name}",
-                role: "{case_3_role}",
+                name: "Nさん",
+                role: "女性",
                 quote: "紹介が増え、営業にかける時間が半分に。その分、本業に集中できるようになりました。",
                 result: "紹介率 3倍",
-              },
-              {
-                name: "{case_4_name}",
-                role: "{case_4_role}",
-                quote: "商談が怖かったのが嘘のよう。今では商談が楽しみになりました。",
-                result: "商談数 2倍",
-              },
-              {
-                name: "{case_5_name}",
-                role: "{case_5_role}",
-                quote: "仲間との学び合いがモチベーションに。一人では続かなかったと思います。",
-                result: "継続6ヶ月",
-              },
-              {
-                name: "{case_6_name}",
-                role: "{case_6_role}",
-                quote: "卒業後もコミュニティで繋がれるのが嬉しい。長期的な成長を実感しています。",
-                result: "年商 2倍",
+                stars: 5,
+                image: "https://private-us-east-1.manuscdn.com/sessionFile/M1bAAzRicI7311tVVClw23/sandbox/Xf7f5m9oGSS55o5ZfcZ2nv-img-3_1770034262000_na1fn_dGVzdGltb25pYWwtbi1mZW1hbGU.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvTTFiQUF6UmljSTczMTF0VlZDbHcyMy9zYW5kYm94L1hmN2Y1bTlvR1NTNTVvNVpmY1oybnYtaW1nLTNfMTc3MDAzNDI2MjAwMF9uYTFmbl9kR1Z6ZEdsdGIyNXBZV3d0YmkxbVpXMWhiR1UucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=inBsCxk8Vw5cvt~pXLL22mV6u5cdSZ7eTiTJqccmFtDP92CLjNbLGe2int4fpzclkczKRxlq9CuqblOuCtEfhyM8~8zlxpVPn3yVXoPAQpfXuKds0vW6tJ6KjWR~vKVK3yCs9MwjY7qAkLNHCqx13rGLqsgGZLS5iYsAripjWjdy4cJ~bfkvfhqdjjfqGf32tmPXnlAMkEI6eVjc-3sUfAZTM8L4eGuioC2VrDSuvhVCVCx8xb9JHsKX-9OsH~zlwBqbf8ExBlyQgM96lIEpjMP5LlIQpJBJ9E-Xmg~cyFubqanB7ReOGZp-loLW3pmU42vIZvy1MyAVlpLNQueOng__",
               },
             ].map((testimonial, i) => (
               <motion.div
@@ -977,34 +966,36 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.1 }}
                 className="brand-card p-6"
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <Star
                       key={j}
-                      className="h-4 w-4 fill-accent text-accent"
+                      className={`h-4 w-4 ${j < Math.floor(testimonial.stars) ? 'fill-accent text-accent' : j < testimonial.stars ? 'fill-accent/50 text-accent' : 'fill-gray-200 text-gray-200'}`}
                     />
                   ))}
                 </div>
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed quote-brand">
                   "{testimonial.quote}"
                 </p>
-                <div className="flex items-center justify-between">
-                  <div>
+                <div className="flex items-center gap-4">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="flex-1">
                     <p className="font-semibold text-foreground text-sm">
-                      {testimonial.name}
+                      {testimonial.name}　{testimonial.role}
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      {testimonial.role}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">成果</p>
-                    <p className="text-sm font-bold brand-gradient-text">
-                      {testimonial.result}
-                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <p className="text-xs text-muted-foreground">成果</p>
+                      <p className="text-sm font-bold brand-gradient-text">
+                        {testimonial.result}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -1289,7 +1280,7 @@ export default function Home() {
                 <div className="mt-8 pt-6 border-t border-border text-center">
                   <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <Shield className="h-4 w-4 text-primary" />
-                    <span>14日間全額返金保証</span>
+                    <span>全額返金保証付</span>
                   </div>
                 </div>
               </div>
