@@ -12,10 +12,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Google Fonts: Shippori Mincho (見出し) + Noto Sans JP (本文) -->
+    <!-- Google Fonts: Noto Sans JP (メイン) + Montserrat (英数字) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     
     <!-- OGP -->
     <meta property="og:title" content="成約の方程式 | 営業が苦手でも"売れる型"が手に入る" />
@@ -26,14 +26,15 @@
     <style>
       /* Font family definitions */
       :root {
-        --font-mincho: 'Shippori Mincho', serif;
         --font-sans: 'Noto Sans JP', sans-serif;
+        --font-display: 'Montserrat', 'Noto Sans JP', sans-serif;
       }
       body {
         font-family: var(--font-sans);
       }
-      h1, h2, h3, .font-mincho {
-        font-family: var(--font-mincho);
+      /* Numbers and English text use Montserrat */
+      .font-display, .font-montserrat {
+        font-family: var(--font-display);
       }
     </style>
   </head>

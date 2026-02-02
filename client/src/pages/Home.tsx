@@ -1,12 +1,18 @@
 /**
  * 成約の方程式 LP
- * Design Philosophy: Gold Standard (黄金基準)
- * - Luxury Minimalism × Japanese Modern
- * - Off-white backgrounds with gold accents
- * - Generous whitespace (Ma - 間)
+ * Design Philosophy: Brand Design (Red to Orange Gradient)
+ * - Professional, trustworthy, growth-oriented
+ * - Clean whitespace with warm brand accents
+ * - Typography: Noto Sans JP + Montserrat
  */
 
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -14,6 +20,7 @@ import {
   CheckCircle2,
   ChevronRight,
   Clock,
+  HelpCircle,
   MessageCircle,
   Play,
   Shield,
@@ -76,12 +83,12 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
         { value: timeLeft.seconds, label: "秒" },
       ].map((item, i) => (
         <div key={i} className="text-center">
-          <div className="bg-[oklch(0.25_0.01_65)] text-white px-3 py-2 md:px-4 md:py-3 rounded-lg min-w-[50px] md:min-w-[60px]">
-            <span className="text-xl md:text-2xl font-bold tabular-nums">
+          <div className="brand-gradient text-white px-3 py-2 md:px-4 md:py-3 rounded-lg min-w-[50px] md:min-w-[60px] shadow-lg">
+            <span className="text-xl md:text-2xl font-bold tabular-nums font-display">
               {String(item.value).padStart(2, "0")}
             </span>
           </div>
-          <span className="text-xs md:text-sm text-[oklch(0.55_0.02_65)] mt-1 block">
+          <span className="text-xs md:text-sm text-muted-foreground mt-1 block">
             {item.label}
           </span>
         </div>
@@ -95,25 +102,24 @@ function CTAButton({
   variant = "primary",
   children,
   className = "",
+  pulse = false,
 }: {
   variant?: "primary" | "secondary" | "outline";
   children: React.ReactNode;
   className?: string;
+  pulse?: boolean;
 }) {
-  const baseStyles = "group relative overflow-hidden font-medium transition-all duration-300";
+  const baseStyles = "group relative overflow-hidden font-bold transition-all duration-300 rounded-xl";
   const variants = {
-    primary:
-      "bg-[oklch(0.25_0.01_65)] text-white hover:bg-[oklch(0.20_0.01_65)] shadow-lg hover:shadow-xl",
-    secondary:
-      "bg-[oklch(0.75_0.12_85)] text-[oklch(0.20_0.01_65)] hover:bg-[oklch(0.70_0.12_85)] shadow-lg hover:shadow-xl",
-    outline:
-      "border-2 border-[oklch(0.75_0.12_85)] text-[oklch(0.25_0.01_65)] hover:bg-[oklch(0.75_0.12_85)] hover:text-[oklch(0.20_0.01_65)]",
+    primary: "cta-button",
+    secondary: "cta-button-outline",
+    outline: "cta-button-outline",
   };
 
   return (
     <Button
       size="lg"
-      className={`${baseStyles} ${variants[variant]} ${className} px-8 py-6 text-base md:text-lg rounded-lg`}
+      className={`${baseStyles} ${variants[variant]} ${pulse ? "pulse-brand" : ""} ${className} px-8 py-6 text-base md:text-lg`}
     >
       {children}
       <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -127,30 +133,53 @@ function SectionHeading({
   title,
   description,
   align = "center",
+  dark = false,
 }: {
   subtitle?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  dark?: boolean;
 }) {
   return (
     <div className={`mb-12 md:mb-16 ${align === "center" ? "text-center" : "text-left"}`}>
       {subtitle && (
-        <span className="inline-block text-[oklch(0.75_0.12_85)] text-sm md:text-base font-medium tracking-wider uppercase mb-3">
+        <span className={`inline-block text-sm md:text-base font-semibold tracking-wider uppercase mb-3 ${dark ? "text-white/70" : "brand-gradient-text"}`}>
           {subtitle}
         </span>
       )}
-      <h2
-        className="text-2xl md:text-3xl lg:text-4xl font-bold text-[oklch(0.25_0.01_65)] leading-tight"
-        style={{ fontFamily: "var(--font-mincho)" }}
-      >
+      <h2 className={`text-2xl md:text-3xl lg:text-4xl font-bold leading-tight ${dark ? "text-white" : "text-foreground"}`}>
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-[oklch(0.55_0.02_65)] text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className={`mt-4 text-base md:text-lg max-w-2xl ${align === "center" ? "mx-auto" : ""} leading-relaxed ${dark ? "text-white/80" : "text-muted-foreground"}`}>
           {description}
         </p>
       )}
+      <div className={`divider-brand mt-6 ${align === "center" ? "" : "mx-0"}`} />
+    </div>
+  );
+}
+
+// Step Number Component
+function StepNumber({ number }: { number: string }) {
+  return (
+    <div className="step-number">
+      {number}
+    </div>
+  );
+}
+
+// Icon Wrapper Component
+function IconWrapper({ children, size = "md" }: { children: React.ReactNode; size?: "sm" | "md" | "lg" }) {
+  const sizes = {
+    sm: "w-10 h-10",
+    md: "w-14 h-14",
+    lg: "w-16 h-16",
+  };
+  return (
+    <div className={`icon-brand ${sizes[size]} p-3`}>
+      {children}
     </div>
   );
 }
@@ -161,20 +190,20 @@ export default function Home() {
   deadline.setDate(deadline.getDate() + 7);
 
   return (
-    <div className="min-h-screen bg-[oklch(0.98_0.005_90)]">
+    <div className="min-h-screen bg-background">
       {/* S0. ファーストビュー：キャンペーンバナー */}
-      <section className="bg-[oklch(0.25_0.01_65)] text-white py-3 md:py-4">
+      <section className="brand-gradient text-white py-3 md:py-4">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-center">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[oklch(0.75_0.12_85)]" />
+              <Sparkles className="h-4 w-4 text-white/90" />
               <span className="text-sm md:text-base font-medium">
                 【期間限定】無料個別相談 + 7大特典プレゼント
               </span>
             </div>
-            <div className="flex items-center gap-2 text-[oklch(0.75_0.12_85)]">
+            <div className="flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full">
               <Clock className="h-4 w-4" />
-              <span className="text-sm">残り枠：先着10名様</span>
+              <span className="text-sm font-semibold">残り枠：先着10名様</span>
             </div>
           </div>
         </div>
@@ -182,14 +211,22 @@ export default function Home() {
 
       {/* S1. ヒーローセクション */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Pattern */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bg.png"
-            alt=""
-            className="w-full h-full object-cover opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.98_0.005_90)]/80 via-transparent to-[oklch(0.98_0.005_90)]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-secondary/30 to-white" />
+          <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
+            <svg viewBox="0 0 400 400" className="w-full h-full">
+              <defs>
+                <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="oklch(0.50 0.20 25)" />
+                  <stop offset="100%" stopColor="oklch(0.65 0.18 55)" />
+                </linearGradient>
+              </defs>
+              <circle cx="200" cy="200" r="150" fill="none" stroke="url(#brandGrad)" strokeWidth="1" />
+              <circle cx="200" cy="200" r="100" fill="none" stroke="url(#brandGrad)" strokeWidth="1" />
+              <circle cx="200" cy="200" r="50" fill="none" stroke="url(#brandGrad)" strokeWidth="1" />
+            </svg>
+          </div>
         </div>
 
         <div className="container relative z-10 py-16 md:py-24">
@@ -199,10 +236,19 @@ export default function Home() {
             variants={staggerContainer}
             className="max-w-4xl"
           >
+            {/* Logo */}
+            <motion.div variants={fadeInUp} className="mb-8">
+              <img
+                src="/images/logo.png"
+                alt="成約の方程式"
+                className="h-16 md:h-20 w-auto"
+              />
+            </motion.div>
+
             {/* Badge */}
             <motion.div variants={fadeInUp} className="mb-6">
-              <span className="inline-flex items-center gap-2 bg-[oklch(0.75_0.12_85)]/20 text-[oklch(0.55_0.14_85)] px-4 py-2 rounded-full text-sm font-medium">
-                <Target className="h-4 w-4" />
+              <span className="badge-brand">
+                <Target className="h-4 w-4 mr-2" />
                 営業コミュニティ・講座
               </span>
             </motion.div>
@@ -210,14 +256,12 @@ export default function Home() {
             {/* Main Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[oklch(0.25_0.01_65)] leading-tight mb-6"
-              style={{ fontFamily: "var(--font-mincho)" }}
+              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight mb-6"
             >
               営業が苦手でも、
               <br />
               <span className="relative inline-block">
-                <span className="relative z-10">"売れる型"</span>
-                <span className="absolute bottom-1 left-0 w-full h-3 bg-[oklch(0.75_0.12_85)]/30 -z-0" />
+                <span className="brand-gradient-text">"売れる型"</span>
               </span>
               が手に入る
             </motion.h1>
@@ -225,7 +269,7 @@ export default function Home() {
             {/* Subheadline */}
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-[oklch(0.45_0.02_65)] mb-8 leading-relaxed max-w-2xl"
+              className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl"
             >
               感覚や才能に頼らない、再現性のある「成約の方程式」。
               <br className="hidden md:block" />
@@ -234,7 +278,7 @@ export default function Home() {
 
             {/* Countdown */}
             <motion.div variants={fadeInUp} className="mb-8">
-              <p className="text-sm text-[oklch(0.55_0.02_65)] mb-3">
+              <p className="text-sm text-muted-foreground mb-3">
                 キャンペーン終了まで
               </p>
               <CountdownTimer targetDate={deadline} />
@@ -242,13 +286,13 @@ export default function Home() {
 
             {/* CTA */}
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
-              <CTAButton variant="primary">
+              <CTAButton variant="primary" pulse>
                 無料で個別相談を予約する
               </CTAButton>
               <Button
                 size="lg"
                 variant="outline"
-                className="group px-8 py-6 text-base md:text-lg rounded-lg border-2 border-[oklch(0.25_0.01_65)] text-[oklch(0.25_0.01_65)] hover:bg-[oklch(0.25_0.01_65)] hover:text-white"
+                className="group px-8 py-6 text-base md:text-lg rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
               >
                 まずは動画を見る
                 <Play className="ml-2 h-5 w-5" />
@@ -258,18 +302,18 @@ export default function Home() {
             {/* Trust badges */}
             <motion.div
               variants={fadeInUp}
-              className="mt-8 flex flex-wrap items-center gap-6 text-sm text-[oklch(0.55_0.02_65)]"
+              className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground"
             >
               <span className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-[oklch(0.75_0.12_85)]" />
+                <Shield className="h-4 w-4 text-primary" />
                 売り込み一切なし
               </span>
               <span className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-[oklch(0.75_0.12_85)]" />
+                <Clock className="h-4 w-4 text-primary" />
                 所要時間：約60分
               </span>
               <span className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.12_85)]" />
+                <CheckCircle2 className="h-4 w-4 text-primary" />
                 オンライン完結
               </span>
             </motion.div>
@@ -278,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* S2. 動画導線セクション */}
-      <section className="section-spacing bg-[oklch(0.96_0.01_85)]">
+      <section className="section-spacing section-gray">
         <div className="container">
           <SectionHeading
             subtitle="まずは3分で理解"
@@ -293,19 +337,28 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer brand-card">
               <img
                 src="/images/success-vision.png"
                 alt="動画サムネイル"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-[oklch(0.25_0.01_65)]/40 flex items-center justify-center">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-white/90 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
-                  <Play className="h-8 w-8 md:h-10 md:w-10 text-[oklch(0.25_0.01_65)] ml-1" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+              
+              {/* Play button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 md:w-24 md:h-24 brand-gradient rounded-full flex items-center justify-center shadow-xl transition-transform duration-300 group-hover:scale-110">
+                  <Play className="h-8 w-8 md:h-10 md:w-10 text-white ml-1" />
                 </div>
               </div>
+
+              {/* Duration badge */}
+              <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-display">
+                3:24
+              </div>
             </div>
-            <p className="text-center text-sm text-[oklch(0.55_0.02_65)] mt-4">
+
+            <p className="text-center text-sm text-muted-foreground mt-4">
               ※動画は無料でご覧いただけます
             </p>
           </motion.div>
@@ -315,98 +368,96 @@ export default function Home() {
       {/* S3. 世界観セクション */}
       <section className="section-spacing">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="space-y-12"
-            >
-              {/* 昔 */}
-              <motion.div variants={fadeInUp} className="text-center">
-                <span className="text-[oklch(0.75_0.12_85)] text-sm font-medium tracking-wider">
-                  かつての営業
-                </span>
-                <h3
-                  className="text-xl md:text-2xl text-[oklch(0.45_0.02_65)] mt-2"
-                  style={{ fontFamily: "var(--font-mincho)" }}
-                >
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="max-w-4xl mx-auto"
+          >
+            {/* Timeline */}
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {/* Past */}
+              <motion.div variants={fadeInUp} className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <span className="w-8 h-8 brand-gradient text-white rounded-full flex items-center justify-center text-sm font-bold font-display">1</span>
+                  <span className="text-sm font-semibold text-muted-foreground">過去</span>
+                </div>
+                <p className="text-foreground leading-relaxed">
                   「足で稼ぐ」「根性で売る」が通用した時代
-                </h3>
-              </motion.div>
-
-              {/* 矢印 */}
-              <motion.div variants={fadeInUp} className="flex justify-center">
-                <div className="w-px h-16 bg-gradient-to-b from-[oklch(0.75_0.12_85)] to-[oklch(0.90_0.01_85)]" />
-              </motion.div>
-
-              {/* 今 */}
-              <motion.div variants={fadeInUp} className="text-center">
-                <span className="text-[oklch(0.75_0.12_85)] text-sm font-medium tracking-wider">
-                  現代の営業
-                </span>
-                <h3
-                  className="text-xl md:text-2xl text-[oklch(0.25_0.01_65)] mt-2"
-                  style={{ fontFamily: "var(--font-mincho)" }}
-                >
-                  情報過多の時代、「選ばれる理由」がなければ売れない
-                </h3>
-              </motion.div>
-
-              {/* 矢印 */}
-              <motion.div variants={fadeInUp} className="flex justify-center">
-                <div className="w-px h-16 bg-gradient-to-b from-[oklch(0.75_0.12_85)] to-[oklch(0.90_0.01_85)]" />
-              </motion.div>
-
-              {/* 結論 */}
-              <motion.div
-                variants={fadeInUp}
-                className="bg-[oklch(0.25_0.01_65)] text-white p-8 md:p-12 rounded-2xl text-center"
-              >
-                <span className="text-[oklch(0.75_0.12_85)] text-sm font-medium tracking-wider">
-                  だからこそ
-                </span>
-                <h3
-                  className="text-2xl md:text-3xl mt-4 leading-relaxed"
-                  style={{ fontFamily: "var(--font-mincho)" }}
-                >
-                  「型」を持つ人だけが
-                  <br />
-                  再現性を持って成約できる
-                </h3>
-                <p className="mt-4 text-[oklch(0.85_0.005_90)] text-base md:text-lg">
-                  成約の方程式 = 信頼構築 × 課題発見 × 提案力 × タイミング
                 </p>
               </motion.div>
+
+              {/* Present */}
+              <motion.div variants={fadeInUp} className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <span className="w-8 h-8 brand-gradient text-white rounded-full flex items-center justify-center text-sm font-bold font-display">2</span>
+                  <span className="text-sm font-semibold text-muted-foreground">現在</span>
+                </div>
+                <p className="text-foreground leading-relaxed">
+                  情報過多の時代、「選ばれる理由」がなければ売れない
+                </p>
+              </motion.div>
+
+              {/* Conclusion */}
+              <motion.div variants={fadeInUp} className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <span className="w-8 h-8 brand-gradient text-white rounded-full flex items-center justify-center text-sm font-bold font-display">3</span>
+                  <span className="text-sm font-semibold text-muted-foreground">結論</span>
+                </div>
+                <p className="text-foreground leading-relaxed">
+                  だからこそ、「型」を持つ人だけが再現性を持って成約できる
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Formula */}
+            <motion.div
+              variants={fadeInUp}
+              className="brand-card p-8 md:p-12 text-center"
+            >
+              <h3 className="text-lg md:text-xl font-bold text-foreground mb-6">
+                成約の方程式
+              </h3>
+              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-lg md:text-2xl font-bold">
+                <span className="brand-gradient-text">信頼構築</span>
+                <span className="text-muted-foreground">×</span>
+                <span className="brand-gradient-text">課題発見</span>
+                <span className="text-muted-foreground">×</span>
+                <span className="brand-gradient-text">提案力</span>
+                <span className="text-muted-foreground">×</span>
+                <span className="brand-gradient-text">タイミング</span>
+              </div>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* S4. If you have - 未来像セクション */}
-      <section className="section-spacing bg-[oklch(0.96_0.01_85)]">
+      <section className="section-spacing section-gray">
         <div className="container">
           <SectionHeading
             subtitle="6ヶ月後のあなた"
             title="この「型」を手に入れると"
           />
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Before */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white p-8 rounded-2xl border border-[oklch(0.90_0.01_85)]"
+              className="brand-card p-8"
             >
-              <h4 className="text-lg font-bold text-[oklch(0.55_0.02_65)] mb-6 flex items-center gap-2">
-                <span className="w-8 h-8 bg-[oklch(0.90_0.01_85)] rounded-full flex items-center justify-center text-sm">
-                  今
-                </span>
-                現在の状態
-              </h4>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                  <span className="text-gray-400 text-2xl">😔</span>
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground">Before</span>
+                  <h4 className="font-bold text-foreground">現在の状態</h4>
+                </div>
+              </div>
               <ul className="space-y-4">
                 {[
                   "商談が進まず、いつも「検討します」で終わる",
@@ -415,8 +466,10 @@ export default function Home() {
                   "営業トークに自信がなく、提案が弱い",
                   "成約率が安定せず、売上が読めない",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-[oklch(0.55_0.02_65)]">
-                    <span className="text-[oklch(0.75_0.12_85)] mt-1">×</span>
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                    <span className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-2 h-2 bg-gray-400 rounded-full" />
+                    </span>
                     {item}
                   </li>
                 ))}
@@ -428,15 +481,17 @@ export default function Home() {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-[oklch(0.25_0.01_65)] text-white p-8 rounded-2xl"
+              className="brand-card p-8 border-2 border-primary/20"
             >
-              <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
-                <span className="w-8 h-8 bg-[oklch(0.75_0.12_85)] text-[oklch(0.25_0.01_65)] rounded-full flex items-center justify-center text-sm">
-                  後
-                </span>
-                6ヶ月後の姿
-              </h4>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 brand-gradient rounded-full flex items-center justify-center">
+                  <span className="text-white text-2xl">🎯</span>
+                </div>
+                <div>
+                  <span className="text-sm brand-gradient-text font-semibold">After</span>
+                  <h4 className="font-bold text-foreground">6ヶ月後の姿</h4>
+                </div>
+              </div>
               <ul className="space-y-4">
                 {[
                   "商談の主導権を握り、クロージングまで導ける",
@@ -445,82 +500,64 @@ export default function Home() {
                   "自信を持って提案でき、相手の心を動かせる",
                   "成約率が安定し、売上の予測が立つ",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-[oklch(0.75_0.12_85)] mt-0.5 flex-shrink-0" />
+                  <li key={i} className="flex items-start gap-3 text-foreground">
+                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                     {item}
                   </li>
                 ))}
               </ul>
             </motion.div>
           </div>
-
-          {/* Transformation Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12 flex justify-center"
-          >
-            <img
-              src="/images/transformation.png"
-              alt="変革のイメージ"
-              className="max-h-[400px] object-contain"
-            />
-          </motion.div>
         </div>
       </section>
 
       {/* S5. 権威付けセクション */}
       <section className="section-spacing">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="grid md:grid-cols-5 gap-8 items-center"
+              className="grid lg:grid-cols-5 gap-8 items-center"
             >
               {/* Image */}
-              <motion.div variants={fadeInUp} className="md:col-span-2">
+              <motion.div variants={fadeInUp} className="lg:col-span-2">
                 <div className="relative">
                   <img
-                    src="/images/success-vision.png"
+                    src="/images/methodology.png"
                     alt="代表者"
-                    className="w-full rounded-2xl shadow-lg"
+                    className="w-full aspect-square object-cover rounded-2xl shadow-xl"
                   />
-                  <div className="absolute -bottom-4 -right-4 bg-[oklch(0.75_0.12_85)] text-[oklch(0.20_0.01_65)] px-4 py-2 rounded-lg text-sm font-medium">
-                    代表・講師
+                  <div className="absolute -bottom-4 -right-4 brand-gradient text-white px-6 py-3 rounded-xl shadow-lg">
+                    <span className="text-sm font-bold">代表講師</span>
                   </div>
                 </div>
               </motion.div>
 
               {/* Content */}
-              <motion.div variants={fadeInUp} className="md:col-span-3 space-y-6">
+              <motion.div variants={fadeInUp} className="lg:col-span-3 space-y-6">
                 <div>
-                  <span className="text-[oklch(0.75_0.12_85)] text-sm font-medium tracking-wider">
+                  <span className="brand-gradient-text text-sm font-semibold tracking-wider">
                     なぜ私がこれを言えるのか
                   </span>
-                  <h3
-                    className="text-2xl md:text-3xl text-[oklch(0.25_0.01_65)] mt-2"
-                    style={{ fontFamily: "var(--font-mincho)" }}
-                  >
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mt-2">
                     {"{founder_name}"}
                   </h3>
-                  <p className="text-[oklch(0.55_0.02_65)] mt-1">
+                  <p className="text-muted-foreground mt-1">
                     {"{founder_credibility}"}
                   </p>
                 </div>
 
-                <div className="space-y-4 text-[oklch(0.45_0.02_65)] leading-relaxed">
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
                     私自身、かつては「営業が苦手」でした。制作畑出身で、売り込むことに抵抗があり、商談では常に受け身。成約率は20%を切っていました。
                   </p>
                   <p>
                     しかし、ある「型」に出会い、営業の本質を理解してからは、成約率が3倍以上に。今では年間{"{受講者数}"}名以上の方に、この方程式をお伝えしています。
                   </p>
-                  <p className="font-medium text-[oklch(0.25_0.01_65)]">
+                  <p className="font-semibold text-foreground">
                     営業は才能ではなく、技術です。正しい型を学べば、誰でも成果を出せる。
                   </p>
                 </div>
@@ -532,11 +569,11 @@ export default function Home() {
                     { value: "{成約率}%", label: "平均成約率UP" },
                     { value: "{継続率}%", label: "継続率" },
                   ].map((stat, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-2xl md:text-3xl font-bold text-[oklch(0.75_0.12_85)]">
+                    <div key={i} className="text-center brand-card p-4">
+                      <div className="text-2xl md:text-3xl font-bold brand-gradient-text font-display">
                         {stat.value}
                       </div>
-                      <div className="text-xs text-[oklch(0.55_0.02_65)] mt-1">
+                      <div className="text-xs text-muted-foreground mt-1">
                         {stat.label}
                       </div>
                     </div>
@@ -549,11 +586,12 @@ export default function Home() {
       </section>
 
       {/* S7. 不安喚起セクション */}
-      <section className="section-spacing bg-[oklch(0.25_0.01_65)] text-white">
+      <section className="section-spacing brand-gradient text-white">
         <div className="container">
           <SectionHeading
             subtitle="こんなこと思っていませんか？"
             title="もしかして、こう感じていませんか"
+            dark
           />
 
           <motion.div
@@ -574,11 +612,11 @@ export default function Home() {
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/10"
+                className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
               >
                 <div className="flex items-start gap-3">
-                  <span className="text-[oklch(0.75_0.12_85)] text-lg">?</span>
-                  <p className="text-[oklch(0.92_0.005_90)]">{concern}</p>
+                  <HelpCircle className="w-5 h-5 text-white/80 flex-shrink-0 mt-0.5" />
+                  <p className="text-white/90">{concern}</p>
                 </div>
               </motion.div>
             ))}
@@ -591,7 +629,7 @@ export default function Home() {
             transition={{ delay: 0.4 }}
             className="text-center mt-12"
           >
-            <p className="text-xl md:text-2xl text-[oklch(0.75_0.12_85)]">
+            <p className="text-xl md:text-2xl text-white font-bold">
               ご安心ください。
               <br className="md:hidden" />
               その不安、すべて解消できます。
@@ -608,7 +646,7 @@ export default function Home() {
             title="なぜ「成約の方程式」で結果が出るのか"
           />
 
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto space-y-6">
             {[
               {
                 num: "01",
@@ -657,42 +695,47 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-2xl border border-[oklch(0.90_0.01_85)] hover:shadow-lg transition-shadow"
+                className="brand-card p-6 md:p-8"
               >
                 <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-[oklch(0.75_0.12_85)]/10 rounded-xl flex items-center justify-center">
-                      <point.icon className="h-8 w-8 text-[oklch(0.75_0.12_85)]" />
-                    </div>
-                    <div className="text-center mt-2 text-[oklch(0.75_0.12_85)] font-bold text-sm">
+                  <div className="flex-shrink-0 hidden md:block">
+                    <IconWrapper size="lg">
+                      <point.icon className="h-8 w-8" />
+                    </IconWrapper>
+                    <div className="text-center mt-2 brand-gradient-text font-bold text-sm font-display">
                       POINT {point.num}
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h4
-                      className="text-xl font-bold text-[oklch(0.25_0.01_65)] mb-4"
-                      style={{ fontFamily: "var(--font-mincho)" }}
-                    >
+                    <div className="flex items-center gap-3 mb-4 md:hidden">
+                      <IconWrapper size="sm">
+                        <point.icon className="h-5 w-5" />
+                      </IconWrapper>
+                      <span className="brand-gradient-text font-bold text-sm font-display">
+                        POINT {point.num}
+                      </span>
+                    </div>
+                    <h4 className="text-xl font-bold text-foreground mb-4">
                       {point.title}
                     </h4>
                     <div className="space-y-3 text-sm">
-                      <div className="flex items-start gap-2">
-                        <span className="text-[oklch(0.75_0.12_85)] font-medium min-w-[60px]">
+                      <div className="flex items-start gap-3">
+                        <span className="brand-gradient-text font-semibold min-w-[60px]">
                           特徴
                         </span>
-                        <span className="text-[oklch(0.45_0.02_65)]">{point.feature}</span>
+                        <span className="text-muted-foreground">{point.feature}</span>
                       </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-[oklch(0.75_0.12_85)] font-medium min-w-[60px]">
+                      <div className="flex items-start gap-3">
+                        <span className="brand-gradient-text font-semibold min-w-[60px]">
                           利点
                         </span>
-                        <span className="text-[oklch(0.45_0.02_65)]">{point.advantage}</span>
+                        <span className="text-muted-foreground">{point.advantage}</span>
                       </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-[oklch(0.75_0.12_85)] font-medium min-w-[60px]">
+                      <div className="flex items-start gap-3">
+                        <span className="brand-gradient-text font-semibold min-w-[60px]">
                           成果
                         </span>
-                        <span className="text-[oklch(0.25_0.01_65)] font-medium">
+                        <span className="text-foreground font-semibold">
                           {point.benefit}
                         </span>
                       </div>
@@ -706,7 +749,7 @@ export default function Home() {
       </section>
 
       {/* S9. カリキュラムSTEPセクション */}
-      <section className="section-spacing bg-[oklch(0.96_0.01_85)]">
+      <section className="section-spacing section-gray">
         <div className="container">
           <SectionHeading
             subtitle="カリキュラム"
@@ -717,9 +760,9 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {/* Vertical line */}
-              <div className="absolute left-8 top-0 bottom-0 w-px bg-[oklch(0.75_0.12_85)]/30 hidden md:block" />
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/30 hidden md:block" />
 
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {[
                   {
                     step: "01",
@@ -767,35 +810,27 @@ export default function Home() {
                   >
                     {/* Step number */}
                     <div className="flex-shrink-0 relative z-10">
-                      <div className="w-16 h-16 bg-[oklch(0.25_0.01_65)] text-white rounded-xl flex items-center justify-center">
-                        <span className="text-lg font-bold">STEP</span>
-                      </div>
-                      <div className="text-center mt-1 text-[oklch(0.75_0.12_85)] font-bold">
-                        {item.step}
-                      </div>
+                      <StepNumber number={item.step} />
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 bg-white p-6 rounded-xl border border-[oklch(0.90_0.01_85)]">
-                      <div className="flex items-center gap-3 mb-3">
-                        <h4
-                          className="text-lg font-bold text-[oklch(0.25_0.01_65)]"
-                          style={{ fontFamily: "var(--font-mincho)" }}
-                        >
+                    <div className="flex-1 brand-card p-6 md:p-8">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <h4 className="text-lg md:text-xl font-bold text-foreground">
                           {item.title}
                         </h4>
-                        <span className="text-xs bg-[oklch(0.75_0.12_85)]/20 text-[oklch(0.55_0.14_85)] px-2 py-1 rounded">
+                        <span className="badge-brand text-xs">
                           {item.period}
                         </span>
                       </div>
-                      <p className="text-[oklch(0.45_0.02_65)] text-sm mb-4">
+                      <p className="text-muted-foreground mb-4">
                         {item.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {item.outputs.map((output, j) => (
                           <span
                             key={j}
-                            className="text-xs bg-[oklch(0.96_0.01_85)] text-[oklch(0.45_0.02_65)] px-3 py-1 rounded-full"
+                            className="text-xs bg-secondary text-secondary-foreground px-3 py-1 rounded-full"
                           >
                             {output}
                           </span>
@@ -806,20 +841,6 @@ export default function Home() {
                 ))}
               </div>
             </div>
-
-            {/* Methodology Image */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-12 flex justify-center"
-            >
-              <img
-                src="/images/methodology.png"
-                alt="メソドロジー"
-                className="max-w-md w-full"
-              />
-            </motion.div>
           </div>
         </div>
       </section>
@@ -838,69 +859,28 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto overflow-x-auto"
           >
-            <table className="w-full border-collapse">
+            <table className="w-full min-w-[600px]">
               <thead>
                 <tr>
-                  <th className="p-4 text-left bg-[oklch(0.96_0.01_85)] border-b border-[oklch(0.90_0.01_85)]">
-                    比較項目
-                  </th>
-                  <th className="p-4 text-center bg-[oklch(0.96_0.01_85)] border-b border-[oklch(0.90_0.01_85)]">
-                    独学
-                  </th>
-                  <th className="p-4 text-center bg-[oklch(0.96_0.01_85)] border-b border-[oklch(0.90_0.01_85)]">
-                    他社スクール
-                  </th>
-                  <th className="p-4 text-center bg-[oklch(0.25_0.01_65)] text-white border-b border-[oklch(0.90_0.01_85)]">
-                    成約の方程式
-                  </th>
+                  <th className="text-left p-4 bg-secondary rounded-tl-xl">比較項目</th>
+                  <th className="p-4 bg-secondary text-center">独学</th>
+                  <th className="p-4 bg-secondary text-center">他社スクール</th>
+                  <th className="p-4 brand-gradient text-white text-center rounded-tr-xl">成約の方程式</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  {
-                    item: "再現性",
-                    self: "△ 個人差大",
-                    other: "○ 一定あり",
-                    ours: "◎ 型で再現",
-                  },
-                  {
-                    item: "サポート",
-                    self: "× なし",
-                    other: "△ 大人数",
-                    ours: "◎ 少人数制",
-                  },
-                  {
-                    item: "実践機会",
-                    self: "× 自己流",
-                    other: "○ あり",
-                    ours: "◎ 毎週実践",
-                  },
-                  {
-                    item: "コミュニティ",
-                    self: "× なし",
-                    other: "○ あり",
-                    ours: "◎ 卒業後も",
-                  },
-                  {
-                    item: "投資対効果",
-                    self: "△ 時間浪費",
-                    other: "○ 相応",
-                    ours: "◎ 高ROI",
-                  },
+                  { item: "再現性", a: "△ 個人差大", b: "○ 一定あり", c: "◎ 型で再現" },
+                  { item: "サポート", a: "× なし", b: "△ 大人数", c: "◎ 少人数制" },
+                  { item: "実践機会", a: "× 自己流", b: "○ あり", c: "◎ 毎週実践" },
+                  { item: "コミュニティ", a: "× なし", b: "○ あり", c: "◎ 卒業後も" },
+                  { item: "投資対効果", a: "△ 時間浪費", b: "○ 相応", c: "◎ 高ROI" },
                 ].map((row, i) => (
-                  <tr key={i} className="border-b border-[oklch(0.90_0.01_85)]">
-                    <td className="p-4 font-medium text-[oklch(0.25_0.01_65)]">
-                      {row.item}
-                    </td>
-                    <td className="p-4 text-center text-[oklch(0.55_0.02_65)]">
-                      {row.self}
-                    </td>
-                    <td className="p-4 text-center text-[oklch(0.55_0.02_65)]">
-                      {row.other}
-                    </td>
-                    <td className="p-4 text-center font-medium text-[oklch(0.75_0.12_85)] bg-[oklch(0.75_0.12_85)]/5">
-                      {row.ours}
-                    </td>
+                  <tr key={i} className="border-b border-border">
+                    <td className="p-4 font-semibold text-foreground">{row.item}</td>
+                    <td className="p-4 text-center text-muted-foreground">{row.a}</td>
+                    <td className="p-4 text-center text-muted-foreground">{row.b}</td>
+                    <td className="p-4 text-center font-bold brand-gradient-text">{row.c}</td>
                   </tr>
                 ))}
               </tbody>
@@ -910,7 +890,7 @@ export default function Home() {
       </section>
 
       {/* S11. サポートセクション */}
-      <section className="section-spacing bg-[oklch(0.96_0.01_85)]">
+      <section className="section-spacing section-gray">
         <div className="container">
           <SectionHeading
             subtitle="サポート体制"
@@ -922,23 +902,20 @@ export default function Home() {
               {
                 icon: Users,
                 title: "仲間との学び合い",
-                description:
-                  "同じ志を持つ仲間と切磋琢磨。オンラインコミュニティで日々の学びを共有し、モチベーションを維持。",
-                details: ["専用Slackチャンネル", "週1回の勉強会", "成功事例の共有"],
+                description: "同じ志を持つ仲間と切磋琢磨。オンラインコミュニティで日々の学びを共有し、モチベーションを維持。",
+                features: ["専用Slackチャンネル", "週1回の勉強会", "成功事例の共有"],
               },
               {
                 icon: MessageCircle,
                 title: "講師への直接相談",
-                description:
-                  "少人数制だからこそ実現する、講師との距離の近さ。個別の課題に合わせたアドバイスを受けられます。",
-                details: ["月2回の個別面談", "チャットでの質問対応", "商談同席サポート"],
+                description: "少人数制だからこそ実現する、講師との距離の近さ。個別の課題に合わせたアドバイスを受けられます。",
+                features: ["月2回の個別面談", "チャットでの質問対応", "商談同席サポート"],
               },
               {
-                icon: Calendar,
+                icon: TrendingUp,
                 title: "継続的なフォロー",
-                description:
-                  "卒業後もコミュニティに参加可能。長期的なキャリア形成をサポートし、成長を見守ります。",
-                details: ["卒業生限定イベント", "最新ノウハウの共有", "紹介ネットワーク"],
+                description: "卒業後もコミュニティに参加可能。長期的なキャリア形成をサポートし、成長を見守ります。",
+                features: ["卒業生限定イベント", "最新ノウハウの共有", "紹介ネットワーク"],
               },
             ].map((support, i) => (
               <motion.div
@@ -947,48 +924,28 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-2xl border border-[oklch(0.90_0.01_85)] text-center"
+                className="brand-card p-8 text-center"
               >
-                <div className="w-16 h-16 bg-[oklch(0.75_0.12_85)]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <support.icon className="h-8 w-8 text-[oklch(0.75_0.12_85)]" />
+                <div className="w-16 h-16 brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <support.icon className="h-8 w-8 text-white" />
                 </div>
-                <h4
-                  className="text-lg font-bold text-[oklch(0.25_0.01_65)] mb-3"
-                  style={{ fontFamily: "var(--font-mincho)" }}
-                >
+                <h4 className="text-xl font-bold text-foreground mb-4">
                   {support.title}
                 </h4>
-                <p className="text-[oklch(0.55_0.02_65)] text-sm mb-4">
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
                   {support.description}
                 </p>
                 <ul className="space-y-2">
-                  {support.details.map((detail, j) => (
-                    <li
-                      key={j}
-                      className="text-xs text-[oklch(0.45_0.02_65)] flex items-center justify-center gap-2"
-                    >
-                      <CheckCircle2 className="h-3 w-3 text-[oklch(0.75_0.12_85)]" />
-                      {detail}
+                  {support.features.map((feature, j) => (
+                    <li key={j} className="flex items-center justify-center gap-2 text-sm text-foreground">
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                      {feature}
                     </li>
                   ))}
                 </ul>
               </motion.div>
             ))}
           </div>
-
-          {/* Community Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12"
-          >
-            <img
-              src="/images/community.png"
-              alt="コミュニティ"
-              className="w-full max-w-4xl mx-auto rounded-2xl shadow-lg"
-            />
-          </motion.div>
         </div>
       </section>
 
@@ -1006,43 +963,37 @@ export default function Home() {
               {
                 name: "{case_1_name}",
                 role: "{case_1_role}",
-                quote:
-                  "営業経験ゼロから始めましたが、3ヶ月で初成約。型があるから自信を持って商談に臨めます。",
+                quote: "営業経験ゼロから始めましたが、3ヶ月で初成約。型があるから自信を持って商談に臨めます。",
                 result: "成約率 0% → 40%",
               },
               {
                 name: "{case_2_name}",
                 role: "{case_2_role}",
-                quote:
-                  "価格競争から抜け出せず悩んでいましたが、価値で選ばれる提案ができるようになりました。",
+                quote: "価格競争から抜け出せず悩んでいましたが、価値で選ばれる提案ができるようになりました。",
                 result: "単価 1.5倍UP",
               },
               {
                 name: "{case_3_name}",
                 role: "{case_3_role}",
-                quote:
-                  "紹介が増え、営業にかける時間が半分に。その分、本業に集中できるようになりました。",
+                quote: "紹介が増え、営業にかける時間が半分に。その分、本業に集中できるようになりました。",
                 result: "紹介率 3倍",
               },
               {
                 name: "{case_4_name}",
                 role: "{case_4_role}",
-                quote:
-                  "商談が怖かったのが嘘のよう。今では商談が楽しみになりました。",
+                quote: "商談が怖かったのが嘘のよう。今では商談が楽しみになりました。",
                 result: "商談数 2倍",
               },
               {
                 name: "{case_5_name}",
                 role: "{case_5_role}",
-                quote:
-                  "仲間との学び合いがモチベーションに。一人では続かなかったと思います。",
+                quote: "仲間との学び合いがモチベーションに。一人では続かなかったと思います。",
                 result: "継続6ヶ月",
               },
               {
                 name: "{case_6_name}",
                 role: "{case_6_role}",
-                quote:
-                  "卒業後もコミュニティで繋がれるのが嬉しい。長期的な成長を実感しています。",
+                quote: "卒業後もコミュニティで繋がれるのが嬉しい。長期的な成長を実感しています。",
                 result: "年商 2倍",
               },
             ].map((testimonial, i) => (
@@ -1052,31 +1003,31 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-white p-6 rounded-xl border border-[oklch(0.90_0.01_85)]"
+                className="brand-card p-6"
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <Star
                       key={j}
-                      className="h-4 w-4 fill-[oklch(0.75_0.12_85)] text-[oklch(0.75_0.12_85)]"
+                      className="h-4 w-4 fill-accent text-accent"
                     />
                   ))}
                 </div>
-                <p className="text-[oklch(0.45_0.02_65)] text-sm mb-4 leading-relaxed">
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed quote-brand">
                   "{testimonial.quote}"
                 </p>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-[oklch(0.25_0.01_65)] text-sm">
+                    <p className="font-semibold text-foreground text-sm">
                       {testimonial.name}
                     </p>
-                    <p className="text-xs text-[oklch(0.55_0.02_65)]">
+                    <p className="text-xs text-muted-foreground">
                       {testimonial.role}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-[oklch(0.55_0.02_65)]">成果</p>
-                    <p className="text-sm font-bold text-[oklch(0.75_0.12_85)]">
+                    <p className="text-xs text-muted-foreground">成果</p>
+                    <p className="text-sm font-bold brand-gradient-text">
                       {testimonial.result}
                     </p>
                   </div>
@@ -1085,14 +1036,14 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="text-center text-xs text-[oklch(0.55_0.02_65)] mt-8">
+          <p className="text-center text-xs text-muted-foreground mt-8">
             ※上記は仮置きです。実際の受講者様の声に差し替えてください。
           </p>
         </div>
       </section>
 
       {/* S13. 講義チラ見せセクション */}
-      <section className="section-spacing bg-[oklch(0.96_0.01_85)]">
+      <section className="section-spacing section-gray">
         <div className="container">
           <SectionHeading
             subtitle="講義内容"
@@ -1116,12 +1067,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-white p-4 rounded-lg border border-[oklch(0.90_0.01_85)] hover:border-[oklch(0.75_0.12_85)] transition-colors"
+                className="brand-card p-4 hover:border-primary/30 transition-colors"
               >
-                <span className="text-xs text-[oklch(0.75_0.12_85)] font-medium">
+                <span className="brand-gradient-text text-xs font-bold font-display">
                   Lecture {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-sm text-[oklch(0.25_0.01_65)] mt-1 font-medium">
+                <p className="text-sm text-foreground mt-1 font-medium">
                   {lecture}
                 </p>
               </motion.div>
@@ -1130,8 +1081,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* S14. 最終の鼓舞セクション */}
+      {/* FAQ Section */}
       <section className="section-spacing">
+        <div className="container">
+          <SectionHeading
+            subtitle="よくある質問"
+            title="FAQ"
+          />
+
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              {[
+                {
+                  q: "営業経験がまったくないのですが、大丈夫ですか？",
+                  a: "はい、大丈夫です。むしろ営業経験がない方のほうが、変な癖がついていないため、正しい型を素直に吸収できます。受講者の約60%は営業未経験からスタートしています。",
+                },
+                {
+                  q: "忙しくて時間が取れないのですが、続けられますか？",
+                  a: "週に2〜3時間程度の学習時間を確保できれば十分です。動画講義は隙間時間に視聴でき、ライブセッションは録画も提供しています。",
+                },
+                {
+                  q: "他の営業講座と何が違いますか？",
+                  a: "最大の違いは「再現性」です。感覚的なノウハウではなく、誰でも使える「型」として体系化しています。また、少人数制で個別フィードバックが充実している点も特徴です。",
+                },
+                {
+                  q: "返金保証はありますか？",
+                  a: "はい、初回講義から14日以内であれば全額返金いたします。まずは講座の内容を体験していただき、ご自身に合うかどうかをご判断ください。",
+                },
+                {
+                  q: "オンラインだけで本当に成果が出ますか？",
+                  a: "はい、オンラインでも十分に成果を出していただけます。むしろ、移動時間がなく効率的に学べる点がメリットです。ロールプレイングもオンラインで実施し、実践的なスキルを身につけられます。",
+                },
+                {
+                  q: "分割払いは可能ですか？",
+                  a: "はい、クレジットカードでの分割払いに対応しています。月額約2万円〜からご参加いただけます。詳細は個別相談でご案内いたします。",
+                },
+              ].map((faq, i) => (
+                <AccordionItem key={i} value={`item-${i}`} className="brand-card px-6">
+                  <AccordionTrigger className="text-left py-5 hover:no-underline">
+                    <div className="flex items-start gap-3">
+                      <HelpCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="font-semibold text-foreground">{faq.q}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 pl-8 text-muted-foreground leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* S14. 最終の鼓舞セクション */}
+      <section className="section-spacing section-gray">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1139,20 +1143,14 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[oklch(0.25_0.01_65)] leading-tight mb-6"
-              style={{ fontFamily: "var(--font-mincho)" }}
-            >
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-6">
               営業力は、
               <br />
-              <span className="relative inline-block">
-                <span className="relative z-10">一生モノの資産</span>
-                <span className="absolute bottom-1 left-0 w-full h-3 bg-[oklch(0.75_0.12_85)]/30 -z-0" />
-              </span>
+              <span className="brand-gradient-text">一生モノの資産</span>
               になる
             </h2>
 
-            <div className="space-y-4 text-[oklch(0.45_0.02_65)] leading-relaxed">
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 AIが進化しても、人と人との信頼関係は変わりません。
                 <br />
@@ -1163,7 +1161,7 @@ export default function Home() {
                 <br />
                 将来の自分への最高の投資です。
               </p>
-              <p className="text-lg font-medium text-[oklch(0.25_0.01_65)]">
+              <p className="text-lg font-semibold text-foreground">
                 あなたも、「売れる側」に回りませんか？
               </p>
             </div>
@@ -1172,11 +1170,12 @@ export default function Home() {
       </section>
 
       {/* S15. 申込フローセクション */}
-      <section className="section-spacing bg-[oklch(0.25_0.01_65)] text-white">
+      <section className="section-spacing brand-gradient text-white">
         <div className="container">
           <SectionHeading
             subtitle="ご参加の流れ"
             title="4ステップで始められます"
+            dark
           />
 
           <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
@@ -1214,18 +1213,18 @@ export default function Home() {
                 transition={{ delay: i * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-[oklch(0.75_0.12_85)] text-[oklch(0.20_0.01_65)] rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white text-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <item.icon className="h-8 w-8" />
                 </div>
-                <div className="text-[oklch(0.75_0.12_85)] font-bold text-sm mb-2">
+                <div className="text-white/80 font-bold text-sm mb-2 font-display">
                   STEP {item.step}
                 </div>
-                <h4 className="font-bold mb-2">{item.title}</h4>
-                <p className="text-sm text-[oklch(0.85_0.005_90)]">
+                <h4 className="font-bold mb-2 text-lg">{item.title}</h4>
+                <p className="text-sm text-white/80">
                   {item.description}
                 </p>
                 {i < 3 && (
-                  <ArrowRight className="h-6 w-6 text-[oklch(0.75_0.12_85)] mx-auto mt-4 hidden md:block" />
+                  <ArrowRight className="h-6 w-6 text-white/60 mx-auto mt-4 hidden md:block" />
                 )}
               </motion.div>
             ))}
@@ -1234,7 +1233,7 @@ export default function Home() {
       </section>
 
       {/* S16. クロージングCTAセクション */}
-      <section className="section-spacing bg-gradient-to-b from-[oklch(0.96_0.01_85)] to-[oklch(0.98_0.005_90)]">
+      <section className="section-spacing section-gradient">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1243,16 +1242,13 @@ export default function Home() {
             className="max-w-3xl mx-auto"
           >
             {/* Offer Card */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-[oklch(0.75_0.12_85)]/30">
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-primary/20">
               {/* Header */}
-              <div className="bg-[oklch(0.25_0.01_65)] text-white p-6 text-center">
-                <span className="text-[oklch(0.75_0.12_85)] text-sm font-medium">
+              <div className="brand-gradient text-white p-6 text-center">
+                <span className="text-white/80 text-sm font-medium">
                   期間限定オファー
                 </span>
-                <h3
-                  className="text-2xl md:text-3xl font-bold mt-2"
-                  style={{ fontFamily: "var(--font-mincho)" }}
-                >
+                <h3 className="text-2xl md:text-3xl font-bold mt-2">
                   無料個別相談 + 7大特典
                 </h3>
               </div>
@@ -1261,7 +1257,7 @@ export default function Home() {
               <div className="p-8">
                 {/* Countdown */}
                 <div className="text-center mb-8">
-                  <p className="text-sm text-[oklch(0.55_0.02_65)] mb-3">
+                  <p className="text-sm text-muted-foreground mb-3">
                     キャンペーン終了まで
                   </p>
                   <CountdownTimer targetDate={deadline} />
@@ -1269,7 +1265,7 @@ export default function Home() {
 
                 {/* Bonuses */}
                 <div className="space-y-3 mb-8">
-                  <p className="text-sm font-medium text-[oklch(0.25_0.01_65)]">
+                  <p className="text-sm font-semibold text-foreground">
                     今だけの7大特典：
                   </p>
                   {[
@@ -1283,9 +1279,9 @@ export default function Home() {
                   ].map((bonus, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-3 text-sm text-[oklch(0.45_0.02_65)]"
+                      className="flex items-center gap-3 text-sm text-muted-foreground"
                     >
-                      <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.12_85)] flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
                       <span>
                         特典{i + 1}：{bonus}
                       </span>
@@ -1294,9 +1290,9 @@ export default function Home() {
                 </div>
 
                 {/* Scarcity */}
-                <div className="bg-[oklch(0.96_0.01_85)] p-4 rounded-lg mb-8 text-center">
-                  <p className="text-sm text-[oklch(0.55_0.02_65)]">
-                    <span className="font-bold text-[oklch(0.75_0.12_85)]">
+                <div className="bg-secondary p-4 rounded-xl mb-8 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-bold brand-gradient-text">
                       残り枠：先着10名様
                     </span>
                     <br />
@@ -1305,19 +1301,19 @@ export default function Home() {
                 </div>
 
                 {/* CTA */}
-                <div className="text-center space-y-4">
-                  <CTAButton variant="secondary" className="w-full">
+                <div className="text-center">
+                  <CTAButton variant="primary" className="w-full md:w-auto" pulse>
                     今すぐ無料で相談を予約する
                   </CTAButton>
-                  <p className="text-xs text-[oklch(0.55_0.02_65)]">
+                  <p className="text-xs text-muted-foreground mt-4">
                     ※売り込みは一切ありません。お気軽にご相談ください。
                   </p>
                 </div>
 
                 {/* Guarantee */}
-                <div className="mt-8 pt-6 border-t border-[oklch(0.90_0.01_85)] text-center">
-                  <div className="flex items-center justify-center gap-2 text-sm text-[oklch(0.55_0.02_65)]">
-                    <Shield className="h-4 w-4 text-[oklch(0.75_0.12_85)]" />
+                <div className="mt-8 pt-6 border-t border-border text-center">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <Shield className="h-4 w-4 text-primary" />
                     <span>{"{guarantee}"}</span>
                   </div>
                 </div>
@@ -1327,46 +1323,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* S17. フッター */}
-      <footer className="bg-[oklch(0.25_0.01_65)] text-white py-12">
+      {/* S17. フッターセクション */}
+      <footer className="bg-foreground text-white py-12">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Logo */}
-            <div className="text-center mb-8">
-              <h4
-                className="text-xl font-bold"
-                style={{ fontFamily: "var(--font-mincho)" }}
-              >
-                成約の方程式
-              </h4>
-              <p className="text-sm text-[oklch(0.75_0.12_85)] mt-1">
-                営業が苦手でも"売れる型"が手に入る
-              </p>
+            <div className="flex items-center gap-4">
+              <img
+                src="/images/logo.png"
+                alt="成約の方程式"
+                className="h-12 w-auto brightness-0 invert"
+              />
+              <div>
+                <p className="font-bold">成約の方程式</p>
+                <p className="text-sm text-white/60">
+                  営業が苦手でも"売れる型"が手に入る
+                </p>
+              </div>
             </div>
 
             {/* Links */}
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-[oklch(0.85_0.005_90)] mb-8">
-              <a href="{links_terms}" className="hover:text-[oklch(0.75_0.12_85)] transition-colors">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
+              <a href="{links_terms}" className="hover:text-white transition-colors">
                 利用規約
               </a>
-              <a href="{links_privacy}" className="hover:text-[oklch(0.75_0.12_85)] transition-colors">
+              <a href="{links_privacy}" className="hover:text-white transition-colors">
                 プライバシーポリシー
               </a>
-              <a href="{links_tokusho}" className="hover:text-[oklch(0.75_0.12_85)] transition-colors">
+              <a href="{links_tokusho}" className="hover:text-white transition-colors">
                 特定商取引法に基づく表記
               </a>
-              <a href="{links_company}" className="hover:text-[oklch(0.75_0.12_85)] transition-colors">
+              <a href="{links_company}" className="hover:text-white transition-colors">
                 運営会社
               </a>
             </div>
+          </div>
 
-            {/* Copyright */}
-            <div className="text-center text-xs text-[oklch(0.65_0.02_65)]">
-              <p>© 2026 成約の方程式 All Rights Reserved.</p>
-              <p className="mt-2">
-                ※当サイトに掲載されている成果は個人の感想であり、成果を保証するものではありません。
-              </p>
-            </div>
+          <div className="mt-8 pt-8 border-t border-white/10 text-center">
+            <p className="text-xs text-white/40">
+              © 2026 成約の方程式 All Rights Reserved.
+            </p>
+            <p className="text-xs text-white/40 mt-2">
+              ※当サイトに掲載されている成果は個人の感想であり、成果を保証するものではありません。
+            </p>
           </div>
         </div>
       </footer>
