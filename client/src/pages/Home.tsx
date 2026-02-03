@@ -201,8 +201,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* S0. ファーストビュー：キャンペーンバナー */}
-      <section className="brand-gradient text-white py-3 md:py-4">
+      {/* S0. ファーストビュー：キャンペーンバナー - 固定ヘッダー */}
+      <section className="fixed top-0 left-0 right-0 z-50 brand-gradient text-white py-3 md:py-4 shadow-lg">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-center">
             <div className="flex items-center gap-2">
@@ -220,7 +220,7 @@ export default function Home() {
       </section>
 
       {/* S1. ヒーローセクション */}
-      <section id="hero" className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section id="hero" className="relative min-h-[90vh] flex items-center overflow-hidden pt-[60px] md:pt-[68px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <div 
