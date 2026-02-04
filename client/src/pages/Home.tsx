@@ -297,23 +297,7 @@ export default function Home() {
             </motion.div>
 
             {/* Trust badges */}
-            <motion.div
-              variants={fadeInUp}
-              className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground"
-            >
-              <span className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-primary" />
-                売り込み一切なし
-              </span>
-              <span className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-primary" />
-                所要時間：約60分
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-                オンライン完結
-              </span>
-            </motion.div>
+
           </motion.div>
         </div>
       </section>
@@ -336,7 +320,7 @@ export default function Home() {
           >
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl brand-card">
               <video
-                src="/images/lp-video.mov"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663037552536/UsnPfloqMRhBWJfR.mov"
                 controls
                 playsInline
                 poster="https://private-us-east-1.manuscdn.com/sessionFile/M1bAAzRicI7311tVVClw23/sandbox/wJoRLywbcTcnxhGnvZUgpt-img-1_1770190931000_na1fn_dmlkZW8tdGh1bWJuYWlsLXdoeS1zYWxlcw.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvTTFiQUF6UmljSTczMTF0VlZDbHcyMy9zYW5kYm94L3dKb1JMeXdiY1RjbnhoR252WlVncHQtaW1nLTFfMTc3MDE5MDkzMTAwMF9uYTFmbl9kbWxrWlc4dGRHaDFiV0p1WVdsc0xYZG9lUzF6WVd4bGN3LmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=AZi1gJqWQdSk04f02Ld8ruEvGXaB2E3j6zhGBpSwQblbEmtZilt0~Z-5FIZmt-H9v-0ZM8w3wPeh5JvjSXWpvYFu413DYulDBvGRfXycQd4UY4xxZ-LXIE82fin6w3I5d1Y4UakfBDsz2NKRaSHv1sjdZ6Qru7EHkZz~NCYUNaKnJzUFRtfZHQkZdrhhNhNMi1sV~VHacLAvMSCrCR1WBZXHa6f813~zXZPjf1kD7D42EiXXD4WlscaXS~3f9-Ssl9B7LTMW07zrfEkoaDOd3MOi5c~mSPAFIQsFP9deYWHWcZSYCKP-U21lTRHbFOO8TI34c2FXMGqcqm8d-DsbFQ__"
