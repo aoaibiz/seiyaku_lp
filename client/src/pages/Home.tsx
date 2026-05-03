@@ -49,12 +49,12 @@ const staggerContainer = {
 const LINE_URL = "https://lin.ee/mogbiz";
 
 const imageV2 = {
-  hero: "/images/v2/hero.png",
-  mopico: "/images/v2/mopico-character.png",
-  dashboard: "/images/v2/dashboard.png",
-  community: "/images/v2/community.png",
-  transition: "/images/v2/transition.png",
-  cta: "/images/v2/cta.png",
+  hero: "/images/v2/hero-ai-partner-v2.png",
+  mopico: "/images/v2/mopico-ai-support-v2.png",
+  dashboard: "/images/v2/asp-dashboard-v2.png",
+  community: "/images/v2/community-247-v2.png",
+  transition: "/images/v2/anxiety-to-confidence-v2.png",
+  cta: "/images/v2/cta-join-v2.png",
 };
 
 // CTA Button Component - LINE green for trust and recognition
